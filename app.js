@@ -6,9 +6,10 @@ const wsServer = new WebSocket.Server({
   port: PORT,
 });
 var input = 'w'
-wsServer.on("connection", function (socket) {
+wsServer.on("connection", function (socket,req) {
   // Some feedback on the console
   console.log("A client just connected");
+  const ip = req.socket.remoteAddress;
 
   // Attach some behavior to the incoming socket
   socket.on("message", function (msg) {
@@ -17,7 +18,7 @@ wsServer.on("connection", function (socket) {
 
     // Broadcast that message to all connected clients
     wsServer.clients.forEach(function (client) {
-      client.send("Someone said: " + msg);
+      client.send("Your Ip " + ip);
     });
   });
 
