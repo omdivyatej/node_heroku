@@ -5,7 +5,7 @@ const PORT =process.env.PORT || 5000;
 const wsServer = new WebSocket.Server({
   port: PORT,
 });
-
+var input = 'w'
 wsServer.on("connection", function (socket) {
   // Some feedback on the console
   console.log("A client just connected");
@@ -17,7 +17,7 @@ wsServer.on("connection", function (socket) {
 
     // Broadcast that message to all connected clients
     wsServer.clients.forEach(function (client) {
-      client.send("Someone said: " + msg);
+      client.send("Input Key: " + input);
     });
   });
 
