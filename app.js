@@ -6,24 +6,46 @@ const wsServer = new WebSocket.Server({
   port: PORT,
 });
 var input = 'w'
-wsServer.on("connection", function (socket) {
-  // Some feedback on the console
-  console.log("A client just connected");
+// wsServer.on("connection", function (socket) {
+//   // Some feedback on the console
+//   console.log("A client just connected");
 
-  // Attach some behavior to the incoming socket
-  socket.on("message", function (msg) {
-    console.log("Received message from client: " + msg);
-    // socket.send("Take this back: " + msg);
+//   // Attach some behavior to the incoming socket
+//   socket.on("message", function (msg) {
+//     console.log("Received message from client: " + msg);
+//     // socket.send("Take this back: " + msg);
 
-    // Broadcast that message to all connected clients
-    wsServer.clients.forEach(function (client) {
-      client.send("Input Key: " + input);
-    });
-  });
+//     // Broadcast that message to all connected clients
+//     wsServer.clients.forEach(function (client) {
+//       client.send("Input Key: " + input);
+//     });
+//   });
 
-  socket.on("close", function () {
-    console.log("Client disconnected");
-  });
-});
+//   socket.on("close", function () {
+//     console.log("Client disconnected");
+//   });
+// });
 
 console.log(new Date() + " Server is listening on port " + PORT);
+function start_server(i){
+  wsServer.on("connection", function (socket) {
+    // Some feedback on the console
+    console.log("A client just connected");
+  
+    // Attach some behavior to the incoming socket
+    socket.on("message", function (msg) {
+      console.log("Received message from client: " + msg);
+      // socket.send("Take this back: " + msg);
+  
+      // Broadcast that message to all connected clients
+      wsServer.clients.forEach(function (client) {
+        client.send("Input Key: " + input);
+      });
+    });
+  
+    socket.on("close", function () {
+      console.log("Client disconnected");
+    });
+  });
+}
+start_server(input)
