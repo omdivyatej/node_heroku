@@ -18,9 +18,9 @@ wsServer.on("connection", function (ws) {
     connections[obj.username] = ws
     wsServer.clients.forEach(function (client) {      
          
-    connections[obj.username].send("Hello from server: " +obj.username)
+    //connections[obj.username].send("Hello from server: " +obj.username)
     });
-    
+    connections[obj.username].send("Hello from server: " +obj.username)
     //connections[obj.username].send("Hello from server")
   });
 
