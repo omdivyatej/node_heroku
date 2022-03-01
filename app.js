@@ -45,7 +45,7 @@ const PORT =process.env.PORT || 5000;
 const wsServer = new WebSocket.Server({
   port: PORT,
 });
-const clients = {};
+const clients = [];
 
 const getUniqueID = () => {
     const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
