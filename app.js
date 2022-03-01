@@ -65,7 +65,12 @@ wsServer.on("connection", function (ws) {
     var mess = messagedata.mess;
     console.log(username);
     console.log(mess);
-    clients[username].send(mess);
+    try{
+      clients[username].send(mess);
+    }catch(er){
+      console.log(er)
+    }
+//     clients[username].send(mess);
     })
     connection_CLient.on("close",function(){
        console.log("A Client just got disconnected :" + userID);
